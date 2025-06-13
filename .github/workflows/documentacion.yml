@@ -6,7 +6,7 @@ jobs:
   greeting:
     runs-on: ubuntu-latest
     steps:
-      - uses: damianri/github-actions-javascript-action-by-damianri@v1
+      - uses: DamianRi/github-actions-javascript-action-by-damianri@v1
         with:
           who-to-greet: 'Rick Pepinillo'
 
