@@ -6,13 +6,14 @@ jobs:
   greeting:
     runs-on: ubuntu-latest
     steps:
-      - uses: DamianRi/github-actions-javascript-action-by-damianri@v1
+      - name: Github Actions Javascript Action by damianri
+        uses: DamianRi/github-actions-javascript-action@v1.0.0
         with:
           who-to-greet: 'Rick Pepinillo'
 
   compile:
     runs-on: ubuntu-latest
-
+    if: false
     steps:
       - name: Checkout (copiando repo)
         uses: actions/checkout@v4.2.2
@@ -26,6 +27,7 @@ jobs:
         run: dotnet build --no-restore
   build-pdf:
     runs-on: ubuntu-latest
+    if: false
     steps:
       - uses: actions/checkout@v4
       - uses: baileyjm02/markdown-to-pdf@v1
