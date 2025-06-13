@@ -1,0 +1,37 @@
+name: Compilación y generación de PDF
+on:
+  push:
+    branches: [main]
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout (copiando repo)
+        uses: actions/checkout@v4.2.2
+      - name: Setup .NET Code SDK (instalación de .net en el runner)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+      - name: Instalación de dependencias
+        run: dotnet restore
+      - name: Compilación
+        run: dotnet build --no-restore
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: baileyjm02/markdown-to-pdf@v1
+        with:
+          input_dir: docs
+          output_dir: pdfs
+          images_dir: docs/images
+          # for example <img src="./images/file-name.png">
+          image_import: ./images
+          # Default is true, can set to false to only get PDF files
+          build_html: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: pdfs
+      
